@@ -16,4 +16,4 @@ Recipe API https://www.themealdb.com/api.php
 - **HTML**
 - **SCSS**
 
-<div><img src="https://github.com/Olga-Zyukina/Cookbook/blob/main/Screenshot.png" title="Cookbook" alt="Cookbook"/></div>
+<div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/main/Screenshot.png" title="Cookbook" alt="Cookbook"/></div>
