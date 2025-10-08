@@ -1,16 +1,15 @@
-# Cookbook - Сайт рецептов, многостраничный сайт
+# Cookbook - Recipe website, multi-page website
+An application for accessing API recipes from around the world, created using **Vue 3 + TypeScript + Vite**.
+The application extracts current data from the Themealdb API and provides an interactive interface for viewing recipes, categories, and areas.
 
-Приложение для доступа к API рецептов разных стран мира, созданное с использованием **Vue 3 + TypeScript + Vite**.
-Приложение извлекает текущие данные из **API Themealdb** и предоставляет интерактивный интерфейс для просмотра рецептов, категорий, областей.
+## Features
 
-## Особенности
+- Multi-page website
+- Real-time recipe updates
+- Adaptive design
+- View categories and areas
 
--  Многостраничный сайт.
--  Обновление рецептов в режиме реального времени.
--  Адаптивный дизайн.
--  Просмотр категорий и областей.
-
-## Используемые технологии
+## Technologies Used
 
 -  Vue 3
 -  TypeScript
@@ -21,6 +20,10 @@
 -  Pinia
 -  ElementPlus
 -  Sass
+
+## Live Demo
+
+Check out the live demo: [Cookbook](https://olga-zyukina.github.io/cookbook-vue3-vite/dist/)
 
 ## Структура проекта
 
