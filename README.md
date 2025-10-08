@@ -29,13 +29,13 @@ Check out the live demo: [Cookbook](https://olga-zyukina.github.io/cookbook-vue3
 
 ```
 src/
-├── components/     # Компоненты
-├── pages/          # Страницы
-├── layouts/        # Сетка
-├── types/          # Типы TypeScript
-├── services/       # Функции
-├── assets/         # Cтатические файлы
-└── App.vue         # Корневой компонент
+├── components/     # Vue components
+├── pages/          # Vue pages
+├── layouts/        # Page layout
+├── types/          # TypeScript type definitions
+├── services/       # Functions
+├── assets/         # Static assets
+└── App.vue         # Root component
 ```
 
 <div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/master/Screenshot.png" title="Cookbook" alt="Cookbook"/></div>
