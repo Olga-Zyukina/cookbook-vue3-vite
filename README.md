@@ -25,7 +25,7 @@ The application extracts current data from the Themealdb API and provides an int
 
 Check out the live demo: [Cookbook](https://olga-zyukina.github.io/cookbook-vue3-vite/dist/)
 
-## Структура проекта
+## Project Structure
 
 ```
 src/
