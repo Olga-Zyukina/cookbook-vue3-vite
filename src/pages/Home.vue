@@ -15,6 +15,7 @@ const state = reactive({
   limit: 7,
 });
 const rootStore = useRootStore();
+const _allRecipes: any = computed(() => rootStore.recipes);
 const _active = computed(() => rootStore.activeItem);
 
 const fetchRecipes = async () => {
@@ -29,7 +30,7 @@ const fetchRecipes = async () => {
         _active.value.value
       );
     } else {
-      _recipes.value = await recipeService.getRecipesByLetter(
+      _recipes.value = getRecipesByLetter(
         _active.value.value
       );
     }
@@ -61,13 +62,19 @@ const getRecipePath = (id: number) => {
   return `${ROUTES_PATHS.RECIPE.split(":")[0]}${id}`;
 };
 
+const getRecipesByLetter = (letter: string) => {
+  return _allRecipes.value.filter((item: { strMeal: string }) => {
+      return item.strMeal.toUpperCase().startsWith(letter.toUpperCase());
+    });
+};
+
 const setPage = (e: number) => {
   state.page = e;
 };
 
 onMounted(fetchRecipes);
 
-watch(() => [_active.value.type, _active.value.value], fetchRecipes);
+watch(() => [_allRecipes.value, _active.value.type, _active.value.value], fetchRecipes);
 </script>
 
 <template>

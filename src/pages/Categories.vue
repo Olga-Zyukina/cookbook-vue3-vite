@@ -15,12 +15,12 @@ const categories = computed(() => rootStore.categories);
     <template #inner>
       <AppLoader v-if="!categories" />
       <el-table :data="categories">
-        <el-table-column prop="idCategory" label="Id" width="50" />
+        <!-- <el-table-column prop="id" label="Id" width="50" />
         <el-table-column label="Image" width="100">
           <template #default="scope">
             <img :src="scope.row.strCategoryThumb" class="image" />
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column prop="strCategory" label="Category" width="150" />
         <el-table-column prop="strCategoryDescription" label="Description" />
       </el-table>

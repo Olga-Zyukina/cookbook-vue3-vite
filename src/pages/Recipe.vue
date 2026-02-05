@@ -67,9 +67,7 @@ onMounted(async () => {
             <img :src="recipe.strMealThumb" alt="img" class="image">
             <div>
               <span>Category</span>
-              <el-tag type="primary" effect="dark">{{
-                recipe.strCategory
-              }}</el-tag>
+              <el-tag type="primary" effect="dark">{{ recipe.strCategory }}</el-tag>
             </div>
             <div>
               <span>Time</span>
@@ -126,11 +124,11 @@ onMounted(async () => {
             <div class="col-l">
               <div class="subtitle">Instructions</div>
               <div
-                  v-for="(instruction, index) in recipe.strInstructions.split(/\r?\n/)"
+                  v-for="(instruction, index) in recipe.instructions"
                   :key="index"
                   class="box">
                     <div class="col col-sm">
-                      {{ index + 1 }}
+                      {{ +index + 1 }}
                     </div>
                     <div class="col col-xl">
                       {{ instruction }}

@@ -1,15 +1,20 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { commonService } from '../services';
+import { recipeService, commonService } from '../services';
 
 
 export const useRootStore = defineStore('root', () => {
+  const recipes = ref(null);
   const areas = ref(null);
   const categories = ref(null);
   const ingredients = ref(null);
   const activeItem = ref({'type': 'Letter', 'value': 's'});
 
-  
+  async function getAllRecipes() {
+    const data = await recipeService.getAllRecipes()
+    recipes.value = data
+  }
+
   async function getAreas() {
     const data = await commonService.getAreas()
     areas.value = data
@@ -30,5 +35,5 @@ export const useRootStore = defineStore('root', () => {
     activeItem.value.value = value;
   }  
 
-  return { areas, categories, ingredients, activeItem, getAreas, getCategories, getIngredients, publishActive }
+  return { recipes, areas, categories, ingredients, activeItem, getAllRecipes, getAreas, getCategories, getIngredients, publishActive }
 })

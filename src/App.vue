@@ -6,6 +6,7 @@
   const rootStore = useRootStore();
 
   onMounted(() => {
+    rootStore.getAllRecipes();
     rootStore.getAreas();
     rootStore.getCategories();
     rootStore.getIngredients();
