@@ -14,7 +14,7 @@ The application extracts current data from the Themealdb API and provides an int
 -  Vue 3
 -  TypeScript
 -  Vite
--  [API Themealdb](https://www.themealdb.com/api.php)
+-  [API FoodDB](https://themealdb-inky.vercel.app/)
 -  Vue-router
 -  Axios
 -  Pinia
