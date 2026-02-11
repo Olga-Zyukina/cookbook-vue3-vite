@@ -1,6 +1,6 @@
 # Cookbook - Recipe website, multi-page website
 An application for accessing API recipes from around the world, created using **Vue 3 + TypeScript + Vite**.
-The application extracts current data from the Themealdb API and provides an interactive interface for viewing recipes, categories, and areas.
+The application extracts current data from the API FoodDB and provides an interactive interface for viewing recipes, categories, and areas.
 
 ## Features
 
@@ -39,3 +39,4 @@ src/
 ```
 
 <div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/master/Screenshot.png" title="Cookbook" alt="Cookbook"/></div>
+<div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/master/Screenshot_Recipe.png" title="Cookbook" alt="Cookbook"/></div>
