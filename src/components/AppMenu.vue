@@ -90,7 +90,7 @@ onMounted(isPathActive);
         </template>
         <el-menu-item
           v-for="item in categories"
-          :key="item.strArea"
+          :key="item.strCategory"
           :index="ROUTES_PATHS.HOME"
           :active="_active.value"
           @click="rootStore.publishActive('Category', item.strCategory)"

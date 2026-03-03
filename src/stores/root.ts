@@ -5,9 +5,9 @@ import { recipeService, commonService } from '../services';
 
 export const useRootStore = defineStore('root', () => {
   const recipes = ref(null);
-  const areas = ref(null);
-  const categories = ref(null);
-  const ingredients = ref(null);
+  const areas = ref([{"strArea" : ""}]);
+  const categories = ref([{"id": "", "strCategory" :"","strCategoryDescription": ""}]);
+  const ingredients = ref([]);
   const activeItem = ref({'type': 'Letter', 'value': 's'});
 
   async function getAllRecipes() {
