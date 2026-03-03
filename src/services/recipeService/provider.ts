@@ -6,22 +6,22 @@ export const getAllRecipes = async () => {
   return data?.data?.meals
 };
 
-// export const getRecipesByLetter = async (id: any) => {
+// export const getRecipesByLetter = async (id: string) => {
 //   const data = await axios.get(`${URL_RECIPES_BY_LETTER}${id}`);
 //   return data?.data?.meals
 // };
 
-export const getRecipesById = async (id: any) => {
+export const getRecipesById = async (id: string) => {
   const data = await axios.get(`${URL_RECIPES_BY_ID}${id}`);
   return data?.data?.meals[0];
 };
 
-export const getRecipesByArea = async (id: any) => {
+export const getRecipesByArea = async (id: string) => {
   const data = await axios.get(`${URL_RECIPES_BY_AREA}${id}`);
   return data?.data?.meals
 };
 
-export const getRecipesByCategory = async (id: any) => {
+export const getRecipesByCategory = async (id: string) => {
   const data = await axios.get(`${URL_RECIPES_BY_CATEGORY}${id}`);
   return data?.data?.meals
 };

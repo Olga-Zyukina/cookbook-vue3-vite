@@ -6,8 +6,8 @@ import { ROUTES_PATHS } from "../constants";
 
 const route = useRoute();
 const rootStore = useRootStore();
-const areas: any = computed(() => rootStore.areas);
-const categories: any = computed(() => rootStore.categories);
+const areas = computed(() => rootStore.areas);
+const categories = computed(() => rootStore.categories);
 const alphabet = [
   "a",
   "b",
@@ -34,7 +34,7 @@ const alphabet = [
 ];
 const _active = computed(() => rootStore.activeItem);
 
-const isPathActive = (path: String, active: any) => {
+const isPathActive = (path: string, active: string) => {
   return route.path === path && active === _active.value.value;
 };
 

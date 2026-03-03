@@ -2,14 +2,15 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { recipeService, commonService } from "../services";
+import type { RecipeData, RecipeIngredientsData } from "../types/index";
 import AppLayout from "../layouts/AppLayout.vue";
 import AppLoader from "../components/AppLoader.vue";
 
 const route = useRoute();
-const recipeId: any = route?.params.id;
+const recipeId: string = typeof(route?.params?.id) === "string" ? route.params.id : "";
 const isLoading = ref(false);
-const recipe: any = ref(recipeService.getEmptyRecipe());
-const recipeIngredients = ref([commonService.getEmptyIngredient()]);
+const recipe = ref<RecipeData>(recipeService.getEmptyRecipe());
+const recipeIngredients = ref<RecipeIngredientsData[]>([commonService.getEmptyIngredient()]);
 
 const fetchRecipe = async () => {
   try {

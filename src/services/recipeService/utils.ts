@@ -6,7 +6,7 @@ export const getEmptyRecipe = () => {
     strCategory: "",
     strArea: "",
     strInstructions: "",
-    strMealThumb: null,
+    strMealThumb: "",
     strTags: "",
     strYoutube: "",
     strIngredient1: "",

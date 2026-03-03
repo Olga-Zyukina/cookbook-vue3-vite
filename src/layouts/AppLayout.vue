@@ -6,14 +6,17 @@ import AppMenu from "../components/AppMenu.vue";
 
 const route = useRoute();
 const $props = defineProps({
-    modelValue: { type: Array, default: () => [] },
+    modelValue: { type: String, default: "" },
     home: { type: Boolean, default: false },
   }),
   $emit = defineEmits(["update:modelValue"]),
-  _value: any = ref("");
+  _value: any = ref<{
+    value: string,
+    text: string,
+  }>();
 
 function publishValue() {
-  $emit("update:modelValue", _value.value);
+    $emit("update:modelValue", _value.value);
 }
 
 const toggleSidebar = () => {

@@ -6,8 +6,8 @@ import { useRootStore } from "../stores/root";
 import AppLayout from "../layouts/AppLayout.vue";
 import AppLoader from "../components/AppLoader.vue";
 
-const _recipes: any = ref([]);
-const _filter: any = ref("");
+const _recipes = ref([]);
+const _filter = ref("");
 const _total = ref();
 const _isLoading = ref(false);
 const state = reactive({
@@ -15,7 +15,7 @@ const state = reactive({
   limit: 7,
 });
 const rootStore = useRootStore();
-const _allRecipes: any = computed(() => rootStore.recipes);
+const _allRecipes = computed(() => rootStore.recipes || []);
 const _active = computed(() => rootStore.activeItem);
 
 const fetchRecipes = async () => {
@@ -29,7 +29,7 @@ const fetchRecipes = async () => {
       _recipes.value = await recipeService.getRecipesByCategory(
         _active.value.value
       );
-    } else {
+    } else if (_allRecipes !==null && _allRecipes.value !==null) {
       _recipes.value = getRecipesByLetter(
         _active.value.value
       );
@@ -41,7 +41,7 @@ const fetchRecipes = async () => {
   }
 };
 
-const _filtered_list: any = computed(() => {
+const _filtered_list = computed(() => {
   if (_filter.value != "") {
     return _recipes.value.filter((item: { strMeal: string }) => {
       return item.strMeal.toUpperCase().includes(_filter.value.toUpperCase());
