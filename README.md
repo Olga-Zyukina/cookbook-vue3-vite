@@ -18,6 +18,7 @@ The application extracts current data from the API FoodDB and provides an intera
 -  Vue-router
 -  Axios
 -  Pinia
+-  Docker
 -  ElementPlus
 -  Sass
 
@@ -37,6 +38,23 @@ src/
 ├── assets/         # Static assets
 └── App.vue         # Root component
 ```
+## Development
+- Make sure you have Node.js installed.
+- Clone the repo to your machine.
+- Install all dependencies
+`npm install`
+- Development:
+`npm run dev`
+- Production:
+`npm run build`
+
+## Docker
+- Deploy image
+`docker build .`
+- Deploy images & run containers
+`docker compose up`
+Open browser in Development mode: localhost:5173
+Open browser in Production mode: localhost:5174
 
 <div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/master/Screenshot.png" title="Cookbook" alt="Cookbook"/></div>
 <div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/master/Screenshot_Recipe.png" title="Cookbook" alt="Cookbook"/></div>
