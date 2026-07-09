@@ -47,13 +47,13 @@ src/
 `npm run dev`
 - Production:
 `npm run build`
-
+	
 ## Docker
-- Deploy image
+- Building image
 `docker build .`
-- Deploy images & run containers
-`docker compose up`
-Open browser in Development mode: localhost:5173
+- Building images & run containers
+`docker compose up`<br/>
+Open browser in Development mode: localhost:5173<br/>
 Open browser in Production mode: localhost:5174
 
 <div><img src="https://github.com/Olga-Zyukina/cookbook-vue3-vite/blob/master/Screenshot.png" title="Cookbook" alt="Cookbook"/></div>
