@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, useId } from "vue";
 import { useRoute } from "vue-router";
 import { recipeService, commonService } from "@/services";
 import type { RecipeData, RecipeIngredientsData } from "@/types/index";
@@ -11,6 +11,7 @@ const recipeId: string = typeof(route?.params?.id) === "string" ? route.params.i
 const isLoading = ref(false);
 const recipe = ref<RecipeData>(recipeService.getEmptyRecipe());
 const recipeIngredients = ref<RecipeIngredientsData[]>([commonService.getEmptyIngredient()]);
+const formId = useId();
 
 const fetchRecipe = async () => {
   try {
@@ -29,7 +30,7 @@ const normalizeRecipeIngredients = () => {
   for (let i = 1; i <= 20; i++) {
     if (recipe.value[`strIngredient${i}`]) {
       const ingr = {
-        id: Math.random().toString(36).slice(2),
+        id: `${formId}-${i}`,
         title: recipe.value[`strIngredient${i}`],
         measure: recipe.value[`strMeasure${i}`],
       };
