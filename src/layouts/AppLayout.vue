@@ -23,7 +23,7 @@ const toggleSidebar = () => {
         <span>CookBook</span>
       </a>
       <Menu @click="toggleSidebar" class="menu-icon" />
-      <div v-if="home == true" class="search">
+      <div v-if="$props.home == true" class="search">
         <el-input
           type="text"
           v-model="model"
