@@ -1,32 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { Search } from "@element-plus/icons-vue";
 import AppMenu from "@/components/AppMenu.vue";
 
 const route = useRoute();
+const model = defineModel();
 const $props = defineProps({
-    modelValue: { type: String, default: "" },
     home: { type: Boolean, default: false },
-  }),
-  $emit = defineEmits(["update:modelValue"]),
-  _value: any = ref<{
-    value: string,
-    text: string,
-  }>();
-
-function publishValue() {
-    $emit("update:modelValue", _value.value);
-}
-
+  });
 const toggleSidebar = () => {
   const app = document.querySelector("body");
   app?.classList.toggle("toggle-sidebar");
 };
 
-onMounted(() => {
-  _value.text = $props.modelValue;
-});
 </script>
 
 <template>
@@ -40,8 +26,7 @@ onMounted(() => {
       <div v-if="home == true" class="search">
         <el-input
           type="text"
-          v-model="_value"
-          @keyup="publishValue()"
+          v-model="model"
           style="width: 300px"
           size="large"
           placeholder="Recipe Search"
