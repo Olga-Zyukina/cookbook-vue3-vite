@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { ROUTES_PATHS } from '../constants'
-import Home from '../pages/Home.vue'
-import Categories from '../pages/Categories.vue'
-import Areas from '../pages/Areas.vue'
-import Recipe from '../pages/Recipe.vue'
+import { ROUTES_PATHS } from '@/constants'
+import Home from '@/pages/Home.vue'
+import Categories from '@/pages/Categories.vue'
+import Areas from '@/pages/Areas.vue'
+import Recipe from '@/pages/Recipe.vue'
 
 
 const router = createRouter({

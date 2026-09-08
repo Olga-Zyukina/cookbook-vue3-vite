@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useRootStore } from "../stores/root";
-import { ROUTES_PATHS } from "../constants";
+import { useRootStore } from "@/stores/root";
+import { ROUTES_PATHS } from "@/constants";
 
 const route = useRoute();
 const rootStore = useRootStore();

@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
-import { recipeService, commonService } from '../services';
+import { recipeService, commonService } from '@/services';
 
 
 export const useRootStore = defineStore('root', () => {

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, reactive, ref, onMounted, watch } from "vue";
-import { recipeService } from "../services";
-import { ROUTES_PATHS } from "../constants";
-import { useRootStore } from "../stores/root";
-import AppLayout from "../layouts/AppLayout.vue";
-import AppLoader from "../components/AppLoader.vue";
+import { recipeService } from "@/services";
+import { ROUTES_PATHS } from "@/constants";
+import { useRootStore } from "@/stores/root";
+import AppLayout from "@/layouts/AppLayout.vue";
+import AppLoader from "@/components/AppLoader.vue";
 
 const _recipes = ref([]);
 const _filter = ref("");

@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { Search } from "@element-plus/icons-vue";
-import AppMenu from "../components/AppMenu.vue";
+import AppMenu from "@/components/AppMenu.vue";
 
 const route = useRoute();
 const $props = defineProps({

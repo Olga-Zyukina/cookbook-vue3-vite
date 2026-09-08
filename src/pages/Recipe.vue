@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { recipeService, commonService } from "../services";
-import type { RecipeData, RecipeIngredientsData } from "../types/index";
-import AppLayout from "../layouts/AppLayout.vue";
-import AppLoader from "../components/AppLoader.vue";
+import { recipeService, commonService } from "@/services";
+import type { RecipeData, RecipeIngredientsData } from "@/types/index";
+import AppLayout from "@/layouts/AppLayout.vue";
+import AppLoader from "@/components/AppLoader.vue";
 
 const route = useRoute();
 const recipeId: string = typeof(route?.params?.id) === "string" ? route.params.id : "";

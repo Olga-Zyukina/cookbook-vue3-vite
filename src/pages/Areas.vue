@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from "vue"
 import { useRootStore } from "../stores/root"
-import AppLayout from "../layouts/AppLayout.vue"
-import AppLoader from "../components/AppLoader.vue"
+import AppLayout from "@/layouts/AppLayout.vue"
+import AppLoader from "@/components/AppLoader.vue"
 
 
 const rootStore = useRootStore();
