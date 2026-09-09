@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
+import { useRootStore } from "@/stores/root";
+
 import { Search } from "@element-plus/icons-vue";
 import AppMenu from "@/components/AppMenu.vue";
 
 const route = useRoute();
+const rootStore = useRootStore();
+
 const model = defineModel();
 const $props = defineProps({
     home: { type: Boolean, default: false },
@@ -18,10 +22,10 @@ const toggleSidebar = () => {
 <template>
   <el-container>
     <el-header>
-      <a href="/" class="logo">
+      <RouterLink :to="{ name: 'home' }" class="logo" @click="rootStore.publishActive('Letter', 's')">
         <img src="../../public/logo.png" alt="logo" />
         <span>CookBook</span>
-      </a>
+      </RouterLink> 
       <Menu @click="toggleSidebar" class="menu-icon" />
       <div v-if="$props.home == true" class="search">
         <el-input
