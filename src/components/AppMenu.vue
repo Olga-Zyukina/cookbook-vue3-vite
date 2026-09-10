@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useRootStore } from "@/stores/root";
 import { ROUTES_PATHS } from "@/constants";
@@ -38,7 +38,6 @@ const isPathActive = (path: string, active: string) => {
   return route.path === path && active === _active.value.value;
 };
 
-onMounted(isPathActive);
 </script>
 
 <template>
@@ -57,7 +56,7 @@ onMounted(isPathActive);
           v-for="item in alphabet"
           :key="item"
           :index="ROUTES_PATHS.HOME"
-          :active="_active.value"
+          :active="item === _active.value"
           @click="rootStore.publishActive('Letter', item)"
           :class="['item', isPathActive(ROUTES_PATHS.HOME, item) && 'active']"
         >
@@ -73,7 +72,7 @@ onMounted(isPathActive);
           v-for="item in areas"
           :key="item.strArea"
           :index="ROUTES_PATHS.HOME"
-          :active="_active.value"
+          :active="item.strArea === _active.value"
           @click="rootStore.publishActive('Area', item.strArea)"
           :class="[
             'item',
@@ -92,7 +91,7 @@ onMounted(isPathActive);
           v-for="item in categories"
           :key="item.strCategory"
           :index="ROUTES_PATHS.HOME"
-          :active="_active.value"
+          :active="item.strCategory === _active.value"
           @click="rootStore.publishActive('Category', item.strCategory)"
           :class="[
             'item',
@@ -104,8 +103,9 @@ onMounted(isPathActive);
       </el-sub-menu>
     </el-sub-menu>
     <el-menu-item
+      :key="categories"
       :index="ROUTES_PATHS.CATEGORIES"
-      :active="_active.value"
+      :active="'categories' === _active.value"
       @click="rootStore.publishActive('categories', 'categories')"
       :class="[
         'item',
@@ -116,8 +116,9 @@ onMounted(isPathActive);
       <span>Categories</span>
     </el-menu-item>
     <el-menu-item
+      :key="areas"
       :index="ROUTES_PATHS.AREAS"
-      :active="_active"
+      :active="'areas' === _active.value"
       @click="rootStore.publishActive('areas', 'areas')"
       :class="['item', isPathActive(ROUTES_PATHS.AREAS, 'areas') && 'active']"
     >
@@ -129,7 +130,6 @@ onMounted(isPathActive);
 
 <style lang="scss" scoped>
 @import "../assets/styles/index.scss";
-
 .el-menu {
   max-width: 300px;
   border: none;
@@ -151,6 +151,9 @@ onMounted(isPathActive);
     &.active {
       color: var(--el-color-primary);
     }
+  }
+  .is-active {
+      color: #303133;
   }
 }
 </style>

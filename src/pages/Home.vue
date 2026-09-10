@@ -3,11 +3,21 @@ import { computed, reactive, ref, onMounted, watch } from "vue";
 import { recipeService } from "@/services";
 import { ROUTES_PATHS } from "@/constants";
 import { useRootStore } from "@/stores/root";
-import AppLayout from "@/layouts/AppLayout.vue";
 import AppLoader from "@/components/AppLoader.vue";
+const isHome = defineModel('is-home');
+const mainTitle = defineModel('main-title');
+const searchFilter = defineModel<string>(
+  'search-filter',
+  {
+    type: String,
+    required: true,
+  }
+);
+
+isHome.value = true;
+mainTitle.value = 'Recipes';
 
 const _recipes = ref([]);
-const _filter = ref("");
 const _total = ref();
 const _isLoading = ref(false);
 const state = reactive({
@@ -42,9 +52,9 @@ const fetchRecipes = async () => {
 };
 
 const _filtered_list = computed(() => {
-  if (_filter.value != "") {
+  if (searchFilter.value !== '' ) {
     return _recipes.value.filter((item: { strMeal: string }) => {
-      return item.strMeal.toUpperCase().includes(_filter.value.toUpperCase());
+      return item.strMeal.toUpperCase().includes(searchFilter.value.toUpperCase());
     });
   } else {
     return _recipes.value;
@@ -78,48 +88,31 @@ watch(() => [_allRecipes.value, _active.value.type, _active.value.value], fetchR
 </script>
 
 <template>
-  <AppLayout v-model="_filter" :home="true">
-    <template #title> Recipes </template>
-    <template #inner>
-      <AppLoader v-if="_isLoading" />
-      <el-table :data="_paginatedData">
-        <el-table-column prop="idMeal" label="Id" />
-        <el-table-column label="Image">
-          <template #default="scope">
-            <router-link :to="getRecipePath(scope.row.idMeal)">
-              <img :src="scope.row.strMealThumb" class="image" />
-            </router-link>
-          </template>
-        </el-table-column>
-        <el-table-column prop="strMeal" label="Name" />
-        <el-table-column prop="strArea" label="Area" />
-        <el-table-column prop="strCategory" label="Category" />
-        <el-table-column label="Tags">
-          <template #default="scope">
-            <template v-if="scope?.row?.strTags">
-              <el-tag
-                v-for="(tag, key) in scope.row.strTags.split(',')"
-                :key="key"
-                type="primary"
-                class="tag"
-              >
-                {{ tag }}
-              </el-tag>
-            </template>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        background
-        layout="prev, pager, next"
-        size="small"
-        :current-page="state.page"
-        :page-size="state.limit"
-        :total="_total"
-        @current-change="setPage"
-      />
-    </template>
-  </AppLayout>
+  <AppLoader v-if="_isLoading" />
+  <el-table :data="_paginatedData">
+    <el-table-column prop="idMeal" label="Id" />
+    <el-table-column label="Image">
+      <template #default="scope">
+        <router-link :to="getRecipePath(scope.row.idMeal)">
+          <img :src="scope.row.strMealThumb" class="image" />
+        </router-link>
+      </template>
+    </el-table-column>
+    <el-table-column prop="strMeal" label="Name" />
+    <el-table-column prop="strArea" label="Area" />
+    <el-table-column prop="strCategory" label="Category" />
+    <el-table-column label="Tags">
+      <template #default="scope">
+        <template v-if="scope?.row?.strTags">
+          <el-tag v-for="(tag, key) in scope.row.strTags.split(',')" :key="key" type="primary" class="tag">
+            {{ tag }}
+          </el-tag>
+        </template>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-pagination background layout="prev, pager, next" size="small" :current-page="state.page" :page-size="state.limit"
+    :total="_total" @current-change="setPage" />
 </template>
 
 <style lang="scss" scoped>

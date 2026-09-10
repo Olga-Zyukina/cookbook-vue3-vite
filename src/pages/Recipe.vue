@@ -3,7 +3,6 @@ import { ref, onMounted, useId } from "vue";
 import { useRoute } from "vue-router";
 import { recipeService, commonService } from "@/services";
 import type { RecipeData, RecipeIngredientsData } from "@/types/index";
-import AppLayout from "@/layouts/AppLayout.vue";
 import AppLoader from "@/components/AppLoader.vue";
 
 const route = useRoute();
@@ -12,13 +11,18 @@ const isLoading = ref(false);
 const recipe = ref<RecipeData>(recipeService.getEmptyRecipe());
 const recipeIngredients = ref<RecipeIngredientsData[]>([commonService.getEmptyIngredient()]);
 const formId = useId();
+const isHome = defineModel('is-home');
+const mainTitle = defineModel('main-title');
+mainTitle.value = "";
+isHome.value = false;
 
 const fetchRecipe = async () => {
   try {
     isLoading.value = true;
     const data = await recipeService.getRecipesById(recipeId);
-    isLoading.value = false;
     recipe.value = { ...data };
+    mainTitle.value = recipe.value.strMeal;
+    isLoading.value = false;
   } catch (error) {
     console.log(error);
   }
@@ -58,90 +62,81 @@ onMounted(async () => {
 </script>
 
 <template>
-  <AppLayout>
-    <template #title>
-      {{ recipe.strMeal }}
-    </template>
-    <template #inner>
-      <AppLoader v-if="isLoading" />
-      <div v-else class="wrapper">
-          <div class=" info">
-            <img :src="recipe.strMealThumb" alt="img" class="image">
-            <div>
-              <span>Category</span>
-              <el-tag type="primary" effect="dark">{{ recipe.strCategory }}</el-tag>
-            </div>
-            <div>
-              <span>Time</span>
-              {{ time }} minutes
-            </div>
-            <div>
-              <span>Servings</span>
-              {{ servings }} servings
-            </div>
-            <div>
-              <span>Area</span>
-              <el-tag type="primary" effect="dark">{{ recipe.strArea }}</el-tag>
-            </div>
-            <div class="rating">
-              <span>Rating</span>
-              <el-icon size="15"><StarFilled /></el-icon>
-              <el-icon size="15"><StarFilled /></el-icon>
-              <el-icon size="15"><StarFilled /></el-icon>
-              <el-icon size="15"><StarFilled /></el-icon>
-              <el-icon size="15"><StarFilled /></el-icon>
-              ( {{ rating }} )
-            </div>
-            <div v-if="recipe.strTags">
-              <span>Tags</span>
-              <el-tag
-                v-for="(tag, key) in recipe.strTags.split(',')"
-                :key="key"
-                type="primary"
-                effect="plain"
-                class="tag"
-              >
-                {{ tag }}
-              </el-tag>
-            </div>
-          </div>
-          <div class="row justify-space-between">
-            <div class="col-l ingredients">
-              <div class="subtitle">Ingredients</div>
-                <div
-                  v-for="(ingredient, index) in recipeIngredients"
-                  :key="`${ingredient.id}-${index}`"
-                  class="box">
-                    <div class="col col-sm">
-                      {{ index + 1 }}
-                    </div>
-                    <div class="col col-md">
-                      {{ recipeIngredients[index].measure }}
-                    </div>
-                    <div class="col">
-                      {{ recipeIngredients[index].title }}
-                    </div>
-                </div>
-            </div>
-            <div class="col-l">
-              <div class="subtitle">Instructions</div>
-              <div
-                  v-for="(instruction, index) in recipe.instructions"
-                  :key="index"
-                  class="box">
-                    <div class="col col-sm">
-                      {{ +index + 1 }}
-                    </div>
-                    <div class="col col-xl">
-                      {{ instruction }}
-                    </div>
-                </div>
-            </div>
-          </div>
-
+  <AppLoader v-if="isLoading" />
+  <div v-else class="wrapper">
+    <div class=" info">
+      <img :src="recipe.strMealThumb" alt="img" class="image">
+      <div>
+        <span>Category</span>
+        <el-tag type="primary" effect="dark">{{ recipe.strCategory }}</el-tag>
       </div>
-    </template>
-  </AppLayout>
+      <div>
+        <span>Time</span>
+        {{ time }} minutes
+      </div>
+      <div>
+        <span>Servings</span>
+        {{ servings }} servings
+      </div>
+      <div>
+        <span>Area</span>
+        <el-tag type="primary" effect="dark">{{ recipe.strArea }}</el-tag>
+      </div>
+      <div class="rating">
+        <span>Rating</span>
+        <el-icon size="15">
+          <StarFilled />
+        </el-icon>
+        <el-icon size="15">
+          <StarFilled />
+        </el-icon>
+        <el-icon size="15">
+          <StarFilled />
+        </el-icon>
+        <el-icon size="15">
+          <StarFilled />
+        </el-icon>
+        <el-icon size="15">
+          <StarFilled />
+        </el-icon>
+        ( {{ rating }} )
+      </div>
+      <div v-if="recipe.strTags">
+        <span>Tags</span>
+        <el-tag v-for="(tag, key) in recipe.strTags.split(',')" :key="key" type="primary" effect="plain" class="tag">
+          {{ tag }}
+        </el-tag>
+      </div>
+    </div>
+    <div class="row justify-space-between">
+      <div class="col-l ingredients">
+        <div class="subtitle">Ingredients</div>
+        <div v-for="(ingredient, index) in recipeIngredients" :key="`${ingredient.id}-${index}`" class="box">
+          <div class="col col-sm">
+            {{ index + 1 }}
+          </div>
+          <div class="col col-md">
+            {{ recipeIngredients[index].measure }}
+          </div>
+          <div class="col">
+            {{ recipeIngredients[index].title }}
+          </div>
+        </div>
+      </div>
+      <div class="col-l">
+        <div class="subtitle">Instructions</div>
+        <div v-for="(instruction, index) in recipe.instructions" :key="index" class="box">
+          <div class="col col-sm">
+            {{ +index + 1 }}
+          </div>
+          <div class="col col-xl">
+            {{ instruction }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <style lang="scss" scoped>

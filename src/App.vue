@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { onMounted } from 'vue';
-  import { RouterView } from 'vue-router';
   import { useRootStore } from '@/stores/root';
+  import AppLayout from "@/layouts/AppLayout.vue";
 
   const rootStore = useRootStore();
 
@@ -14,9 +14,8 @@
 </script>
 
 <template>
-  <RouterView />
+  <AppLayout />
 </template>
 
 <style lang="scss" scoped>
-@import "./assets/styles/index.scss";
 </style>

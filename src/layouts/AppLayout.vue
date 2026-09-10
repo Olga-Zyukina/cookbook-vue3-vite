@@ -1,17 +1,19 @@
 <script setup lang="ts">
+  import { ref } from 'vue';
+
 import { useRoute } from "vue-router";
 import { useRootStore } from "@/stores/root";
 
-import { Search } from "@element-plus/icons-vue";
 import AppMenu from "@/components/AppMenu.vue";
+import { Search } from "@element-plus/icons-vue";
 
 const route = useRoute();
 const rootStore = useRootStore();
 
-const model = defineModel();
-const $props = defineProps({
-    home: { type: Boolean, default: false },
-  });
+const isHome = ref(true);
+const searchFilter = ref<string>("");
+const mainTitle = ref<string>("");
+
 const toggleSidebar = () => {
   const app = document.querySelector("body");
   app?.classList.toggle("toggle-sidebar");
@@ -27,12 +29,12 @@ const toggleSidebar = () => {
         <span>CookBook</span>
       </RouterLink> 
       <Menu @click="toggleSidebar" class="menu-icon" />
-      <div v-if="$props.home == true" class="search">
+      <div v-show="isHome" class="search">
         <el-input
           type="text"
-          v-model="model"
           style="width: 300px"
           size="large"
+          v-model="searchFilter"
           placeholder="Recipe Search"
           :suffix-icon="Search"
         />
@@ -51,7 +53,7 @@ const toggleSidebar = () => {
       <el-main>
         <div class="title">
           <h1>
-            <slot name="title"> </slot>
+            {{ mainTitle }}
           </h1>
         </div>
         <el-breadcrumb separator="/">
@@ -61,7 +63,11 @@ const toggleSidebar = () => {
           </el-breadcrumb-item>
         </el-breadcrumb>
         <div class="inner">
-          <slot name="inner"> </slot>
+          <RouterView
+            v-model:is-home="isHome"
+            v-model:search-filter="searchFilter"
+            v-model:main-title="mainTitle"
+          />
         </div>
       </el-main>
     </el-container>
