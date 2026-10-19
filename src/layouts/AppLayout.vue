@@ -2,13 +2,13 @@
   import { ref } from 'vue';
 
 import { useRoute } from "vue-router";
-import { useRootStore } from "@/stores/root";
+import { useItemStore } from '@/stores/activeMenuItem';
 
 import AppMenu from "@/components/AppMenu.vue";
 import { Search } from "@element-plus/icons-vue";
 
 const route = useRoute();
-const rootStore = useRootStore();
+const itemStore = useItemStore();
 
 const isHome = ref(true);
 const searchFilter = ref<string>("");
@@ -24,7 +24,7 @@ const toggleSidebar = () => {
 <template>
   <el-container>
     <el-header>
-      <RouterLink :to="{ name: 'home' }" class="logo" @click="rootStore.publishActive('Letter', 's')">
+      <RouterLink :to="{ name: 'home' }" class="logo" @click="itemStore.setActive('Letter', 's')">
         <img src="../../public/logo.png" alt="logo" />
         <span>CookBook</span>
       </RouterLink> 

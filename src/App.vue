@@ -1,15 +1,22 @@
 <script setup lang="ts">
   import { onMounted } from 'vue';
-  import { useRootStore } from '@/stores/root';
+  import { useRecipesStore } from '@/stores/recipes';
+  import { useAreasStore } from '@/stores/areas';
+  import { useCategoriesStore } from '@/stores/categories';
+  import { useIngredientsStore } from '@/stores/ingredients';
+
   import AppLayout from "@/layouts/AppLayout.vue";
 
-  const rootStore = useRootStore();
+  const recipesStore = useRecipesStore();
+  const areasStore = useAreasStore();
+  const categoriesStore = useCategoriesStore();
+  const ingredientsStore = useIngredientsStore();
 
   onMounted(() => {
-    rootStore.getAllRecipes();
-    rootStore.getAreas();
-    rootStore.getCategories();
-    rootStore.getIngredients();
+    recipesStore.getAllRecipes();
+    areasStore.getAreas();
+    categoriesStore.getCategories();
+    ingredientsStore.getIngredients();
   })
 </script>
 

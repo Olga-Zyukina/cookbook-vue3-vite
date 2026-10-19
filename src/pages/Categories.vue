@@ -1,11 +1,11 @@
 <script setup>
 import { computed } from "vue"
-import { useRootStore } from "@/stores/root"
+import { useCategoriesStore } from '@/stores/categories';
 import AppLayout from "@/layouts/AppLayout.vue"
 import AppLoader from "@/components/AppLoader.vue"
 
-const rootStore = useRootStore();
-const categories = computed(() => rootStore.categories);
+const categoriesStore = useCategoriesStore();
+const categories = computed(() => categoriesStore.categories);
 
 const isHome = defineModel('is-home');
 const mainTitle = defineModel('main-title');

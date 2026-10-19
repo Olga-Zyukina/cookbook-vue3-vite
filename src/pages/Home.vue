@@ -2,8 +2,10 @@
 import { computed, reactive, ref, onMounted, watch } from "vue";
 import { recipeService } from "@/services";
 import { ROUTES_PATHS } from "@/constants";
-import { useRootStore } from "@/stores/root";
+import { useRecipesStore } from '@/stores/recipes';
+import { useItemStore } from '@/stores/activeMenuItem';
 import AppLoader from "@/components/AppLoader.vue";
+
 const isHome = defineModel('is-home');
 const mainTitle = defineModel('main-title');
 const searchFilter = defineModel<string>(
@@ -13,6 +15,9 @@ const searchFilter = defineModel<string>(
     required: true,
   }
 );
+
+const recipesStore = useRecipesStore();
+const itemStore = useItemStore();
 
 isHome.value = true;
 mainTitle.value = 'Recipes';
@@ -24,9 +29,9 @@ const state = reactive({
   page: 1,
   limit: 7,
 });
-const rootStore = useRootStore();
-const _allRecipes = computed(() => rootStore.recipes || []);
-const _active = computed(() => rootStore.activeItem);
+
+const _allRecipes = computed(() => recipesStore.recipes || []);
+const _active = computed(() => itemStore.activeItem);
 
 const fetchRecipes = async () => {
   try {

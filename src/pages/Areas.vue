@@ -1,11 +1,11 @@
 <script setup>
 import { computed } from "vue"
-import { useRootStore } from "../stores/root"
+import { useAreasStore } from '@/stores/areas';
 import AppLayout from "@/layouts/AppLayout.vue"
 import AppLoader from "@/components/AppLoader.vue"
 
-const rootStore = useRootStore();
-const areas = computed(() => rootStore.areas);
+const areasStore = useAreasStore();
+const areas = computed(() => areasStore.areas);
 
 const isHome = defineModel('is-home');
 const mainTitle = defineModel('main-title');

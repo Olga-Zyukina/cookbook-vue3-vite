@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import { useRootStore } from "@/stores/root";
+import { useAreasStore } from '@/stores/areas';
+import { useCategoriesStore } from '@/stores/categories';
+import { useItemStore } from '@/stores/activeMenuItem';
 import { ROUTES_PATHS } from "@/constants";
 
 const route = useRoute();
-const rootStore = useRootStore();
-const areas = computed(() => rootStore.areas);
-const categories = computed(() => rootStore.categories);
+const areasStore = useAreasStore();
+const categoriesStore = useCategoriesStore();
+const itemStore = useItemStore();
+
+const areas = computed(() => areasStore.areas);
+const categories = computed(() => categoriesStore.categories);
 const alphabet = [
   "a",
   "b",
@@ -32,7 +37,7 @@ const alphabet = [
   "w",
   "y",
 ];
-const _active = computed(() => rootStore.activeItem);
+const _active = computed(() => itemStore.activeItem);
 
 const isPathActive = (path: string, active: string) => {
   return route.path === path && active === _active.value.value;
@@ -57,7 +62,7 @@ const isPathActive = (path: string, active: string) => {
           :key="item"
           :index="ROUTES_PATHS.HOME"
           :active="item === _active.value"
-          @click="rootStore.publishActive('Letter', item)"
+          @click="itemStore.setActive('Letter', item)"
           :class="['item', isPathActive(ROUTES_PATHS.HOME, item) && 'active']"
         >
           <span>{{ item }}</span>
@@ -73,7 +78,7 @@ const isPathActive = (path: string, active: string) => {
           :key="item.strArea"
           :index="ROUTES_PATHS.HOME"
           :active="item.strArea === _active.value"
-          @click="rootStore.publishActive('Area', item.strArea)"
+          @click="itemStore.setActive('Area', item.strArea)"
           :class="[
             'item',
             isPathActive(ROUTES_PATHS.HOME, item.strArea) && 'active',
@@ -92,7 +97,7 @@ const isPathActive = (path: string, active: string) => {
           :key="item.strCategory"
           :index="ROUTES_PATHS.HOME"
           :active="item.strCategory === _active.value"
-          @click="rootStore.publishActive('Category', item.strCategory)"
+          @click="itemStore.setActive('Category', item.strCategory)"
           :class="[
             'item',
             isPathActive(ROUTES_PATHS.HOME, item.strCategory) && 'active',
@@ -106,7 +111,7 @@ const isPathActive = (path: string, active: string) => {
       :key="categories"
       :index="ROUTES_PATHS.CATEGORIES"
       :active="'categories' === _active.value"
-      @click="rootStore.publishActive('categories', 'categories')"
+      @click="itemStore.setActive('categories', 'categories')"
       :class="[
         'item',
         isPathActive(ROUTES_PATHS.CATEGORIES, 'categories') && 'active',
@@ -119,7 +124,7 @@ const isPathActive = (path: string, active: string) => {
       :key="areas"
       :index="ROUTES_PATHS.AREAS"
       :active="'areas' === _active.value"
-      @click="rootStore.publishActive('areas', 'areas')"
+      @click="itemStore.setActive('areas', 'areas')"
       :class="['item', isPathActive(ROUTES_PATHS.AREAS, 'areas') && 'active']"
     >
       <el-icon :size="24"><Place /></el-icon>
